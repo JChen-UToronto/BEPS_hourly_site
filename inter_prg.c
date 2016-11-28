@@ -474,7 +474,7 @@ struct results mid_res[];
 	 /*  ---   Transpiration module by X. Luo   ---  */
 
 	 transpiration(Tc_o_sunlit_new, Tc_o_shaded_new, Tc_u_sunlit_new, Tc_u_shaded_new,temp_air, rh_air,
-                    Gw_o_sunlit, Gw_o_shaded, Gw_u_sunlit, Gw_u_shaded,LAI_o_sunlit, LAI_o_shaded, LAI_u_sunlit, LAI_u_shaded,
+                    Gw_o_sunlit, Gw_o_shaded, Gw_u_sunlit, Gw_u_shaded,LAIo_sunlit, LAIo_shaded, LAIu_sunlit, LAIu_shaded,
                     &Trans_o[kkk], &Trans_u[kkk]);
 
 	 /*  ---   Evaporation and sublimation from canopy by X. Luo  ---   */
