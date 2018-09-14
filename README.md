@@ -6,6 +6,7 @@ References：
 Luo, X. Z., Chen, J. M., Liu, J. E., Black, T. A., Croft, H., Staebler, R., . . . McCaughey, H. (2018). Comparison of Big-Leaf, Two-Big-Leaf, and Two-Leaf Upscaling Schemes for Evapotranspiration Estimation Using Coupled Carbon-Water Modeling. Journal of Geophysical Research-Biogeosciences, 123(1), 207-225.
 
 He, L. M., Chen, J. M., Gonsamo, A., Luo, X. Z., Wang, R., Liu, Y., & Liu, R. G. (2018). Changes in the Shadow: The Shifting Role of Shaded Leaves in Global Carbon and Water Cycles Under Climate Change. Geophysical Research Letters, 45(10), 5052-5061.
+
 He, L. M., Chen, J. M., Croft, H., Gonsamo, A., Luo, X. Z., Liu, J. N., . . . Liu, Y. (2017). Nitrogen Availability Dampens the Positive Impacts of CO2 Fertilization on Terrestrial Ecosystem Carbon and Water Cycles. Geophysical Research Letters, 44(22), 11590-11600. doi:10.1002/2017gl075981
 
 He, L., Chen, J. M., Liu, J., Bélair, S., & Luo, X. (2017). Assessment of SMAP soil moisture for global simulation of gross primary production. Journal of Geophysical Research: Biogeosciences, 122, doi:10.1002/2016JG003603. doi:10.1002/2016JG003603
