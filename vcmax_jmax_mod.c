@@ -23,6 +23,8 @@ void Vcmax_Jmax(double lai_o, double clumping, double Vcmax0, \
 	double *Vcmax_sunlit, double *Vcmax_shaded, double *Jmax_sunlit, double *Jmax_shaded)
 {
 	// Note: Vcmax0 is for the leaf vcmax at top of the canopy. LHE
+	// Note: Just to clarify, in this version, Vcmax0 is still the average leaf Vcmax25
+	// 	Vcmax0 * slope_Vcmax_N * leaf_N is the top leaves Vcmax25. XL. 20190403.
 
 	double Kn = 0.3;  // Kn = 0.713/2.4;
 	double G_theta = 0.5;
