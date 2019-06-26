@@ -4,6 +4,7 @@
 //juw
 
 // Equations are based on Baldocchi 1994 Tree Physiology paper
+// also see https://nature.berkeley.edu/biometlab/BiometWeb/leaf_energy_ps.c
 /*
 
          This program solves a cubic equation to calculate
