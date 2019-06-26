@@ -2,7 +2,8 @@
 #include "DB.h"
 
 //juw
-//Bin Chen: 28/05/2015
+
+// Equations are based on Baldocchi 1994 Tree Physiology paper
 /*
 
          This program solves a cubic equation to calculate
@@ -144,7 +145,7 @@ double *ci; // intercellular co2 concentration (ppm)
 		double jmopt; //the maximum potential electron transport rate at 25 deg C (umol m-2 s-1)
         double jmax; //the maximum potential electron transport rate (umol m-2 s-1)
 		double vcmax; //the maximum velocities of carboxylation of Rubisco (umol m-2 s-1)
-        double km_co2; // Michaelis-Menten constant for CO2 (µmol mol-1) 
+        double km_co2; // Michaelis-Menten constant for CO2 (Âµmol mol-1) 
 		double km_o2; // Michaelis-Menten constant for O2 (mmol mol-1)
 		double tau; // the specifity of Rubisco for CO2 compared with O2 
         double resp_ld; // leaf dark respiration (umol m-2 s-1)
