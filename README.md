@@ -1,6 +1,7 @@
 # BEPS hourly version (v4.02)
 
 References：
+
 Luo, X., Keenan, T.F. Global evidence for the acclimation of ecosystem photosynthesis to light. Nat Ecol Evol (2020). https://doi.org/10.1038/s41559-020-1258-7
 
 Chen, J.M., Ju, W., Ciais, P. et al. Vegetation structural change since 1981 significantly enhanced the terrestrial carbon sink. Nat Commun 10, 4259 (2019). https://doi.org/10.1038/s41467-019-12257-8 (for daily version)
