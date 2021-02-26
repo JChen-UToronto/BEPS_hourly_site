@@ -2,6 +2,8 @@
 
 References：
 
+He, L.; Wang, R.; Mostovoy, G.; Liu, J.; Chen, J.M.; Shang, J.; Liu, J.; McNairn, H.; Powers, J. Crop Biomass Mapping Based on Ecosystem Modeling at Regional Scale Using High Resolution Sentinel-2 Data. Remote Sens. 2021, 13, 806. https://doi.org/10.3390/rs13040806
+
 Luo, X., Keenan, T.F. Global evidence for the acclimation of ecosystem photosynthesis to light. Nat Ecol Evol (2020). https://doi.org/10.1038/s41559-020-1258-7
 
 Chen, J.M., Ju, W., Ciais, P. et al. Vegetation structural change since 1981 significantly enhanced the terrestrial carbon sink. Nat Commun 10, 4259 (2019). https://doi.org/10.1038/s41467-019-12257-8 (for daily version)
