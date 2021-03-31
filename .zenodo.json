@@ -1,0 +1,33 @@
+{
+    "description": "<p>The GNU GPLv3 license file is added. -Liming</p>", 
+    "license": "GNU GPLv3", 
+    "title": "The Boreal Ecosystems Productivity Simulator (BEPS): hourly version for site simulation", 
+    "version": "4.02b", 
+    "upload_type": "software", 
+    "publication_date": "2021-03-31", 
+    "creators": [
+        {
+            "affiliation": "University of Toronto", 
+            "name": "Liming He"
+        }, 
+        {
+            "name": "Xiangzhong (Remi) Luo"
+        }, 
+        {
+            "name": "Mo-UofT"
+        }
+    ], 
+    "access_right": "open", 
+    "related_identifiers": [
+        {
+            "scheme": "url", 
+            "identifier": "https://github.com/JChen-UToronto/BEPS_hourly_site_4.02/tree/4.02b", 
+            "relation": "isSupplementTo"
+        }, 
+        {
+            "scheme": "doi", 
+            "identifier": "10.5281/zenodo.4653726", 
+            "relation": "isVersionOf"
+        }
+    ]
+}
