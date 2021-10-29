@@ -1,17 +1,18 @@
-/*************************************************************************
-  Program:     	readcoef.c 
-  Description: reading coefficients 
-  Written by:   G. Mo  --J. Chen's Group
-  Last update:	Dec., 2005 
-*****************************************************************************/
+/// @file readcoef.c
+/// @brief Set soil coefficients according to land cover types and soil types
+///        for soil respiration and NEP calculation
+/// @author G. Mo
+/// @date Dec., 2005
 
 #include "beps.h"
 
-void readcoef(lc,stxt,coef)
-
-int short lc;
-int stxt;   
-double coef[50];
+/// @brief Function to set soil coefficients
+/// @param  lc    land cover type
+///               1-ENF 2-DNF 6-DBF 9-EBF 13-Shrub 40-C4 Plants default:Others
+/// @param  stxt  soil texture
+/// @param  coef  soil coefficients array
+/// @return void
+void readcoef(int short lc,int stxt,double* coef)
 {
   double lignion_leaf,lignion_fr,lignion_wd,clay1,clay_silt1;
 

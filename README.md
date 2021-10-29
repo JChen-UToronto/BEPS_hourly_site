@@ -1,6 +1,89 @@
-# BEPS hourly version (v4.02)
+@mainpage BEPS hourly version (v4.10)
 
-References：
+The user guide for BEPS hourly version for site (v4.10)
+
+-----------------------------------------
+-----------------------------------------
+
+This model was initially developed for boreal ecosystems and has been adapted for all ecosystems over the globe.\n
+BEPS mechanistically includes the impacts of various drivers on gross primary productivity (GPP) (climate, CO2 concentration, and nitrogen deposition) and assimilates vegetation structure (LAI) data. \n
+BEPS also simulates the dynamics of carbon pools beyond GPP and uses a spin-up procedure to prescribe soil carbon pools for estimating autotrophic respiration (AR) and heterotrophic respiration (HR).
+
+The BEPS hourly version for site (v4.10) can be used in two ways:
+
+1) Dependency import \n
+Please copy the header file and source file into traditional IDEs (i.e. Code::block, https://www.codeblocks.org/) and directly build and run the model.
+
+2）CMake \n
+Please find the "CMakeLists.txt" file. The BEPS v4.10 model requires minimum 3.17 CMake version and is based on C99 standard. \n
+It is recommended to use CLion (https://www.jetbrains.com/clion/) and MingW (https://www.mingw-w64.org/) to compile and run the model.
+
+Make sure the "input" and "output" folders have been created in the current folder of the source codes.
+
+According to users' research interests, the parameters and code structure can be edited. Please remember to make readable comment and git version control after each edition.
+
+Please cite [ARTICLES] for using the BEPS model.
+
+Please see "Modules_variables4BEPS.docx" for detailed parameter descriptions.
+
+-----------------------------------------
+-----------------------------------------
+
+The BEPS model requires four input files: 1) Basic information; 2) Carbon pool data; 3) Leaf area index; 4) Meteorological data. \n
+Users can find input data examples in the 'input' folder.
+
+1) Basic information (data1 in the input data example)
+
+long, lat, LC, CI, soiltxt, soiltemp, soilwater, snowdp [WITH TAB SPACE]
+
+long --  the longitude of site
+
+lat  --  the latitude of site
+
+LC -- land cover type of site \n
+1-ENF 2-DNF 6-DBF 9-EBF 13-shrub 40-C4 plants default-others
+
+CI -- clumping index
+
+soiltxt -- soil texture \n
+1-land 2-loamy sand 3-sandy loam 4-loam 5-silty loam 6-sandy clay loam 7-clay loam 8-silty clay loam 9-sandy clay 10-silty clay 11-clay default-Others
+
+soiltemp -- soil temperature
+
+soilwater -- soil water content
+
+snowdp -- snow depth
+
+2) Carbon pool data
+
+LAI_yr, ann_NPP,  ccd,  cssd,  csmd,  cfsd,  cfmd,  csm,  cm,  cs,  cp [WITH TAB SPACE]
+
+3) Leaf area index
+
+Daily float number LAI [WITH TAB SPACE]
+
+4) Meteorological data
+
+DOY, H, SW, TA, VPD/RH, P, WS [WITH TAB SPACE] [LINEBREAK EACH HOUR]
+
+DOY -- day of year (1-365)
+
+H -- hour of day (1-24)
+
+SW -- shortwave radiation
+
+TA -- air temperature
+
+VPD/RH -- vapor pressure deficit OR humidity
+
+P -- precipitation
+
+WS -- wind speed
+
+-----------------------------------------
+-----------------------------------------
+
+References for algorithms in this model：
 
 He, L.; Wang, R.; Mostovoy, G.; Liu, J.; Chen, J.M.; Shang, J.; Liu, J.; McNairn, H.; Powers, J. Crop Biomass Mapping Based on Ecosystem Modeling at Regional Scale Using High Resolution Sentinel-2 Data. Remote Sens. 2021, 13, 806. https://doi.org/10.3390/rs13040806
 
@@ -36,5 +119,9 @@ Chen, J. M., Liu, J., Cihlar, J., & Goulden, M. L. (1999). Daily canopy photosyn
 
 Liu, J., Chen, J. M., Cihlar, J., & Park, W. M. (1997). A process-based boreal ecosystem productivity simulator using remote sensing inputs. Remote Sensing of Environment, 62(2), 158-175. 
 
+-----------------------------------------
+-----------------------------------------
 
+Compiled into doxygen format by Jiye Leng @UofT
 
+Oct., 2021
