@@ -30,9 +30,13 @@ Please see "Modules_variables4BEPS.docx" for detailed parameter descriptions.
 Please cite the following [ARTICLES] for using the BEPS model：
 
 • Liu, J., Chen, J., Cihlar, J., and Park, W. M., A process-based boreal ecosystem productivity simulator using remote sensing inputs, Remote Sensing of Environment, 62, 158-175, 1997.
+
 • Chen, J., Liu, J., Cihlar, J., and Goulden, M. L., Daily canopy photosynthesis model through temporal and spatial scaling for remote sensing applications, Ecological Modelling, 124, 99-119, 1999.
+
 • Liu, J., Chen, J., and Cihlar, J., Mapping evapotranspiration based on remote sensing: an application to Canada’s landmass, Water Resources Research, 39, 1189, doi:10.1029/2002WR001680, 2003.
+
 • Ju, W., Chen, J. M., Black, T.A., Barr, A., Liu, J. and Chen, B., Modelling multi-year coupled carbon and water fluxes in a boreal aspen forest, Agricultural and Forest Meteorology, 140, 136-151. 2006.
+
 • Chen, J., Mo, G., Pisek, J., Liu, J., Deng, F., Maayar, M. E., Ishizawa, M., and Chan, D., Foliage clumping index as an important vegetation structural parameter for estimating global terrestrial gross primary productivity, Global Biogeochemical Cycles, 26, GB1019, doi:10.1029/2010GB003996, 2012.
 
 -----------------------------------------
