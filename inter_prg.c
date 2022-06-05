@@ -155,25 +155,6 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 	m_h2o = parameter[33];           // to be used for module photosynthesis
 	b_h2o = parameter[34];
 
-
-	/*****  Vcmax-Nitrogen calculations，by G.Mo，Apr. 2011  *****/
-
-	if (CosZs>0) // day time
-	{
-		K = G_theta*clumping/CosZs;  // G_theta = 0.5 assuming a spherical leaf angle distribution
-		Vcmax0 = parameter[36];
-		expr1 = 1-exp(-K*lai);
-		expr2 = 1-exp(-lai*(Kn+K));
-		expr3 = 1-exp(-Kn*lai);
-
-        // Formulas based on Chen et al., 2012, GBC
-		if(expr1>0) Vcmax_sunlit = Vcmax0*parameter[47]*parameter[46]*K*expr2/(Kn+K)/expr1;
-		else Vcmax_sunlit = Vcmax0;
-
-		if (K>0 && lai>expr1/K) Vcmax_shaded = Vcmax0*parameter[47]*parameter[46]*(expr3/Kn-expr2/(Kn+K))/(lai-expr1/K);
-		else Vcmax_shaded = Vcmax0;
-	}
-	
 	
 	/*****  LAI calculation module, by B. Chen  *****/
 
