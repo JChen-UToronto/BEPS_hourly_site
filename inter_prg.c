@@ -4,6 +4,7 @@
 
 #include "beps.h"
 #include "soil.h"
+#include "DB.h"
 
 /// @brief the inter-module function between main program and modules
 /// @param  jday       day of year
@@ -114,8 +115,8 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
 	double Tco, Tcu,slope;
 	double H_o_sunlit,H_o_shaded;                                           // sensible heat flux from leaves
-	double LAI_o_sunlit,LAI_o_shaded,LAI_u_sunlit,LAI_u_shaded;             // stem_o,stem_u;
-	double LAIo_sunlit,LAIo_shaded,LAIu_sunlit,LAIu_shaded;
+	double PAI_o_sunlit,PAI_o_shaded,PAI_u_sunlit,PAI_u_shaded;             // stem_o,stem_u;
+	double LAI_o_sunlit,LAI_o_shaded,LAI_u_sunlit,LAI_u_shaded;
 	double radiation_o_sun, radiation_o_shaded;                             // net radiation of leaves
 	double radiation_u_sun, radiation_u_shaded;
 	double GPP_o_sunlit,GPP_o_shaded,GPP_u_sunlit,GPP_u_shaded;
@@ -154,7 +155,8 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 	height_wind_sp = parameter[31];	 // the_height_to_measure_wind_speed, for module aerodynamic_conductance
 	m_h2o = parameter[33];           // to be used for module photosynthesis
 	b_h2o = parameter[34];
-	
+
+
 	/*****  Vcmax-Nitrogen calculations，by G.Mo，Apr. 2011  *****/
 
 	if (CosZs>0) // day time
@@ -172,7 +174,7 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 		if (K>0 && lai>expr1/K) Vcmax_shaded = Vcmax0*parameter[47]*parameter[46]*(expr3/Kn-expr2/(Kn+K))/(lai-expr1/K);
 		else Vcmax_shaded = Vcmax0;
 	}
-
+	
 	
 	/*****  LAI calculation module, by B. Chen  *****/
 
@@ -190,8 +192,8 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
     // lai_calc module
     // separate lai into sunlit and shaded portions
-	lai2(stem_o,stem_u,landcover,CosZs,lai_o,clumping,lai_u,&LAIo_sunlit,&LAIo_shaded,&LAIu_sunlit,
-         &LAIu_shaded,&LAI_o_sunlit,&LAI_o_shaded,&LAI_u_sunlit,&LAI_u_shaded);
+	lai2(stem_o,stem_u,landcover,CosZs,lai_o,clumping,lai_u,&LAI_o_sunlit,&LAI_o_shaded,&LAI_u_sunlit,
+         &LAI_u_shaded,&PAI_o_sunlit,&PAI_o_shaded,&PAI_u_sunlit,&PAI_u_shaded);
 
 
 	/*****  Initialization of this time step  *****/
@@ -251,11 +253,11 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
     if (Zp<0.001) Zp=0;
  
 
-    /*****  Vcmax Jmax module by L. He  *****/
-    //slope_Vcmax_N = parameter[47];
-    //leaf_N = parameter[46];
-
-    //Vcmax_Jmax(lai_o, clumping, Vcmax0,slope_Vcmax_N, leaf_N, CosZs, &Vcmax_sunlit, &Vcmax_shaded, &Jmax_sunlit, &Jmax_shaded);
+//    /*****  Vcmax Jmax module by L. He  *****/
+//    slope_Vcmax_N = parameter[47];
+//    leaf_N = parameter[46];
+//
+//    Vcmax_Jmax(lai_o, clumping, Vcmax0,slope_Vcmax_N, leaf_N, CosZs, &Vcmax_sunlit, &Vcmax_shaded, &Jmax_sunlit, &Jmax_shaded);
 
     // temperatures of overstorey and understorey canopies
     Tc_o_sunlit_old = temp_air-0.5;
@@ -468,16 +470,16 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
         }	// end of while
 
-        GPP_o_sunlit=Ac_o_sunlit*LAIo_sunlit;
-        GPP_o_shaded=Ac_o_shaded*LAIo_shaded;
-        GPP_u_sunlit=Ac_u_sunlit*LAIu_sunlit;
-        GPP_u_shaded=Ac_u_shaded*LAIu_shaded;
+        GPP_o_sunlit=Ac_o_sunlit*LAI_o_sunlit;
+        GPP_o_shaded=Ac_o_shaded*LAI_o_shaded;
+        GPP_u_sunlit=Ac_u_sunlit*LAI_u_sunlit;
+        GPP_u_shaded=Ac_u_shaded*LAI_u_shaded;
 
 
         /*****  Transpiration module by X. Luo  *****/
 
         transpiration(Tc_o_sunlit_new, Tc_o_shaded_new, Tc_u_sunlit_new, Tc_u_shaded_new,temp_air, rh_air,
-                      Gw_o_sunlit, Gw_o_shaded, Gw_u_sunlit, Gw_u_shaded,LAIo_sunlit, LAIo_shaded, LAIu_sunlit, LAIu_shaded,
+                      Gw_o_sunlit, Gw_o_shaded, Gw_u_sunlit, Gw_u_shaded,LAI_o_sunlit, LAI_o_shaded, LAI_u_sunlit, LAI_u_shaded,
                       &Trans_o[kkk], &Trans_u[kkk]);
 
         /*****  Evaporation and sublimation from canopy by X. Luo  *****/
@@ -498,7 +500,7 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
         snowpack_stage2(EiS_o[kkk], EiS_u[kkk], &Wcs_o[kkk], &Wcs_u[kkk]);
 
 	 
-        /*****  Evaporation from soil module by X. Luo  *****/
+        /*****  Evaporation from module by X. Luo  *****/
         Gheat_g=1/ra_g;
         mass_water_g=rho_w*Zp;
 
@@ -597,7 +599,7 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
     var_n[18]=Wcl_u[kkk];
     var_n[19]=Wcs_u[kkk];     // the mass of intercepted liquid water and snow, overstory
-    var_n[20]=Wg_snow[kkk];   // the fraction of ground surface covered by snow and snow mass
+    var_n[20]=Wg_snow[kkk];   // the fraction of ground surface covered in snow and snow mass
 
 
     Lv_liquid = (2.501 - 0.00237 * temp_air) * 1000000;  // The latent heat of water vaporization in j/kg
@@ -617,8 +619,28 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
     mid_res->gpp_o_shaded = GPP_o_shaded;
     mid_res->gpp_u_shaded = GPP_u_shaded;
 
+    // total GPP -> umol/m2/s
+    // mid_res->GPP = GPP_o_sunlit+GPP_o_shaded+GPP_u_sunlit+GPP_u_shaded;
     // total GPP -> gC/m2/step
     mid_res->GPP = (GPP_o_sunlit+GPP_o_shaded+GPP_u_sunlit+GPP_u_shaded)*12*step*0.000001;
+
+    // convert Gs units from m/s to mol/m2/s
+    met.press_bars = 1.013;
+    met.pstat273 = 0.022624 / (273.16 * met.press_bars);
+
+    if(Gs_o_sunlit_new == 0.0001 || Gs_o_shaded_new == 0.0001)
+    {
+        mid_res->Gs_o_sunlit = Gs_o_sunlit_new;
+        mid_res->Gs_o_sunlit = Gs_o_shaded_new;
+    }
+    else
+    {
+        mid_res->Gs_o_sunlit = Gs_o_sunlit_new / (temp_air + 273.13) / met.pstat273;
+        mid_res->Gs_o_sunlit = Gs_o_shaded_new / (temp_air + 273.13) / met.pstat273;
+    }
+
+    mid_res->lai_o_sunlit = LAI_o_sunlit;
+    mid_res->lai_o_shaded = LAI_o_shaded;
 
 
     return;
