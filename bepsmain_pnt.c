@@ -24,8 +24,13 @@ int main() {
     double Ccd[5], Cssd[5], Csmd[5], Cfsd[5], Cfmd[5], Csm[5], Cm[5], Cs[5], Cp[5];
     double lai, clumping;
 
-    char inp_dir[70], site[33], lc_fn[70], cp_fn[70], lai_fn[60], me_fn[60], outp_fn[80];
+    char inp_dir[100], site[33], lc_fn[100], cp_fn[100], lai_fn[100], me_fn[100], outp_fn[100];
     FILE *lc_ptr, *cp_ptr, *laif_ptr, *me_ptr, *outp_ptr;
+
+    FILE *bbparam_ptr;
+    char bbparam_fn[100];
+    float gs_mv, gs_bv, vcmaxv;
+    double gs_m, gs_b, vcmax;
 
     double es, esd;
     double theta_vfc[layer + 1], theta_vwp[layer + 1], thermal_s[layer + 1];
@@ -50,15 +55,16 @@ int main() {
 
     /*****  setup input/output file directory  *****/
     // Input file stream
-    sprintf(inp_dir, "../input");
+    sprintf(inp_dir, "/Users/jiye.leng/Desktop/BEPS_Stomata_Vcmax_Bayes/input");
     sprintf(site, "p1"); // site name
     sprintf(lc_fn, "%s/%s_data1.txt", inp_dir, site); // basic info
-    sprintf(cp_fn, "%s/p1_data2.txt", inp_dir); // carbon pool
+    sprintf(cp_fn, "%s/%s_data2.txt", inp_dir,site); // carbon pool
     sprintf(lai_fn, "%s/%s_lai.txt", inp_dir, site); // daily leaf area index
     sprintf(me_fn, "%s/%s_meteo.txt", inp_dir, site); // hourly meteor. data
+    sprintf(bbparam_fn, "%s/%s_bbparam.txt", inp_dir, site); // Ball-Berry param file
 
     // Output file stream
-    sprintf(outp_fn, "../output/%s_01.txt", site);
+    sprintf(outp_fn, "/Users/jiye.leng/Desktop/BEPS_Stomata_Vcmax_Bayes/output/%s_bbparam.txt", site);
 
     // Set all accu. to 0
     for (i = 0; i <= 10; i++) total[i] = 0;
@@ -124,6 +130,19 @@ int main() {
         exit(0);
     }
 
+    // Open Ball-Berry param file
+    if ((bbparam_ptr=fopen(bbparam_fn, "r")) == NULL)
+    {
+        printf("\n Unable to open Ball-Berry param file, exiting program... \n");
+        exit(0);
+    }
+
+    fscanf(bbparam_ptr, "%f %f %f", &gs_mv, &gs_bv, &vcmaxv);
+    gs_m = gs_mv;
+    gs_b = gs_bv;
+    vcmax = vcmaxv;
+    fclose(bbparam_ptr);
+
     // Open meteor. files
     if ((me_ptr=fopen(me_fn, "r")) == NULL)
     {
@@ -134,7 +153,7 @@ int main() {
 	/// Read daily lai and hourly meteor. data
 	for (jday=1; jday<=365; jday++) 
     {
-        fscanf(laif_ptr,"%f ",&lai_p[jday]); // for fixed Vcmax
+        fscanf(laif_ptr,"%d %f\n",&dd, &lai_p[jday]); // for fixed Vcmax
 
         for (rstep=1;rstep<=24;rstep++)
         {
@@ -144,7 +163,7 @@ int main() {
             m_rad[jday-1][rstep-1]=(float)rv;
             m_tem[jday-1][rstep-1]=(float)tv;
             m_hum[jday-1][rstep-1]=(float)hv;
-            m_pre[jday-1][rstep-1]=(float)pv/1000;
+            m_pre[jday-1][rstep-1]=(float)pv/1000/3600; // convert precipitation mm/h to m/s
             m_wind[jday-1][rstep-1]=(float)wv;
 
         }  // end of hour loop
@@ -155,7 +174,7 @@ int main() {
 	fclose(me_ptr);
 
 	// Read parameters according to land cover types
-	readparam(landcover,parameter);
+	readparam(landcover,parameter, gs_m, gs_b, vcmax);
 
 	// Read soil coefficients according to land cover types and soil types
     // for soil respiration and NEP calculation
@@ -168,9 +187,8 @@ int main() {
         exit(0);
     }
 
-
     /*****  start main simulation *****/
-	printf("simulation under progress...\n");
+//	printf("simulation under progress...\n");
 
 	// Day loop begin
    	for (jday=1; jday<=365; jday++) 
@@ -192,17 +210,17 @@ int main() {
             meteo->LR = -200.0;   //  -200.0 means no measured long-wave radiation, the value will be calculated later
 	
             tem = m_tem[jday-1][rstep];
-            hum = m_hum[jday-1][rstep];
+            hum = m_hum[jday-1][rstep]; // relative humidity
 
-            // Vapour pressure in mbar
-            es =0.46*hum*(tem+273.16)/100;
-            esd  =  6.1078 * exp((17.269*tem)/(237.3 + tem));
+            // Vapour pressure in mbar (hPa)
+//            es = 0.46*hum*(tem+273.16)/100;
+//            esd = 6.1078 * exp((17.269*tem)/(237.3 + tem));
+//
+//            // Calculate relative humidity when reading in VPD
+//            if (es/esd>=1 || es/esd==0)  meteo->rh = 100;
+//            else  meteo->rh = 100*es/esd;
 
-            // Calculate relative humidity when reading in VPD
-            if (es/esd>=1)  meteo->rh = 100;
-            else  meteo->rh = 100*es/esd;
-
-            // meteo->rh = hum;  // when reading in relative humidity, percentage
+            meteo->rh = hum;  // when reading in relative humidity, percentage
 
             if(flag == 0)  // for 1st time step, to initialize var.
             {
@@ -252,12 +270,13 @@ int main() {
             /***** save data for output *****/
             // Hourly output
             outp[1]=mid_res->GPP;
-            outp[2]=mid_res->Trans+mid_res->Evap;
-            outp[3]=mid_res->NEP;
+            outp[2]=mid_res->Trans;
+            outp[3]=mid_res->Evap;
             outp[4]=mid_res->npp_o + mid_res->npp_u;
 
             // Write hourly output to files
-            // fprintf(outp_ptr,"%d %d gpp= %f tr= %f Ev= %f \n",jday,rstep,outp[1],outp[2],outp[3];
+            fprintf(outp_ptr,"%d %d %f %f %f %f %f %f\n", jday, rstep + 1, mid_res->Gs_o_sunlit, mid_res->Gs_o_shaded,
+                    mid_res->lai_o_sunlit, mid_res->lai_o_shaded, mid_res->GPP, mid_res->Trans);
 
             // Sum of output
             total[1]=total[1]+outp[1];
@@ -268,10 +287,9 @@ int main() {
     }// End of daily loop
 
     // Write sum of output to files
-    fprintf(outp_ptr,"total GPP: %f \t ET: %f \tNEP: %f \n",total[1],total[2],total[3]);
-
+//    printf("total GPP: %f \t Trans: %f \t Evapo: %f \n",total[1],total[2],total[3]);
     // Print sum of output
-    printf("total GPP: %f \t ET: %f \tNEP: %f \n",total[1],total[2],total[3]);
+//    printf("total GPP: %f \n",total[1]);
 
     // Close output files
     fclose(outp_ptr);

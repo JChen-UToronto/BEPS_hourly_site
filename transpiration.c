@@ -60,7 +60,9 @@ void transpiration (double tempL_o_sunlit, double tempL_o_shaded, double tempL_u
     LHt_u_sunlit =(vpd_air+slope_vapor_air *(tempL_u_sunlit -temp_air ))*density_air*cp_air*Gtrans_u_sunlit /psy_air;
     LHt_u_shaded =(vpd_air+slope_vapor_air *(tempL_u_shaded -temp_air ))*density_air*cp_air*Gtrans_u_shaded /psy_air;
 
-
     *trans_o =1/(latent_water )*(LHt_o_sunlit *lai_o_sunlit +LHt_o_shaded *lai_o_shaded );
     *trans_u =1/(latent_water )*(LHt_u_sunlit *lai_u_sunlit +LHt_u_shaded *lai_u_shaded );
+
+    *trans_o=max(0,*trans_o);
+    *trans_u=max(0,*trans_u);
 }

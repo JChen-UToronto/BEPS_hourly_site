@@ -82,8 +82,8 @@ void evaporation_canopy(double tempL_o_sunlit, double tempL_o_shaded, double tem
     *evapo_snow_u =1/(latent_snow )*(LHs_u_sunlit *lai_u_sunlit +LHs_u_shaded *lai_u_shaded );
 
     // to eliminate negative ET value
-//    *evapo_water_o=max(0,*evapo_water_o);
-//    *evapo_water_u=max(0,*evapo_water_u);
-//    *evapo_snow_o=max(0,*evapo_snow_o);
-//    *evapo_snow_u=max(0,*evapo_snow_u);
+    *evapo_water_o=max(0,*evapo_water_o);
+    *evapo_water_u=max(0,*evapo_water_u);
+    *evapo_snow_o=max(0,*evapo_snow_o);
+    *evapo_snow_u=max(0,*evapo_snow_u);
 }
