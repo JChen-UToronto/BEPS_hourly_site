@@ -614,6 +614,9 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
     mid_res->Trans = (Trans_o[kkk]+Trans_u[kkk])*step;	// total transpiration  mm/step
     mid_res->Evap = (Eil_o[kkk]+Eil_u[kkk]+Evap_soil[kkk]+Evap_SW[kkk]+EiS_o[kkk]+EiS_u[kkk]+Evap_SS[kkk])*step;   // total evaporation -> mm/step
 
+    printf("%f %f %f %f %f %f \n",Trans_o[kkk]*step,Trans_u[kkk]*step,
+           Eil_o[kkk]*step,Eil_u[kkk]*step,EiS_o[kkk]*step,EiS_u[kkk]*step);
+
     mid_res->gpp_o_sunlit = GPP_o_sunlit;   // umol C/m2/s
     mid_res->gpp_u_sunlit = GPP_u_sunlit;
     mid_res->gpp_o_shaded = GPP_o_shaded;
