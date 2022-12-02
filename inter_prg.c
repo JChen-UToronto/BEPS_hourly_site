@@ -341,13 +341,13 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
             Gww_u_shaded=1.0/(1.0/G_u_a+1.0/G_u_b+100); // conductance for intercepted water of shaded leaves of understorey
 
             // temperatures of overstorey and understorey canopies
-            Tco = (Tc_o_sunlit_old*LAI_o_sunlit+Tc_o_shaded_old*LAI_o_shaded)/(LAI_o_sunlit+LAI_o_shaded);
-            Tcu = (Tc_u_sunlit_old*LAI_u_sunlit+Tc_u_shaded_old*LAI_u_shaded)/(LAI_u_sunlit+LAI_u_shaded);
+            Tco = (Tc_o_sunlit_old*PAI_o_sunlit+Tc_o_shaded_old*PAI_o_shaded)/(PAI_o_sunlit+PAI_o_shaded);
+            Tcu = (Tc_u_sunlit_old*PAI_u_sunlit+Tc_u_shaded_old*PAI_u_shaded)/(PAI_u_sunlit+PAI_u_shaded);
 
 
             /*****  Net radiation at canopy and leaf level module by X.Luo  *****/
 
-            netRadiation(Ks,CosZs,Tco,Tcu,temp_grd,lai_o,lai_u,lai_o+stem_o,lai_u+stem_u,LAI_o_sunlit,LAI_o_shaded,LAI_u_sunlit,LAI_u_shaded,
+            netRadiation(Ks,CosZs,Tco,Tcu,temp_grd,lai_o,lai_u,lai_o+stem_o,lai_u+stem_u,PAI_o_sunlit,PAI_o_shaded,PAI_u_sunlit,PAI_u_shaded,
                          clumping,temp_air,rh_air,alpha_v_sw[kkk],alpha_n_sw[kkk],percentArea_snow_o,percentArea_snow_u,
                          Xg_snow[kkk],alpha_v_o,alpha_n_o,alpha_v_u,alpha_n_u,alpha_v_g,alpha_n_g,
                          &radiation_o,&radiation_u,&radiation_g,&radiation_o_sun, &radiation_o_shaded,&radiation_u_sun,&radiation_u_shaded,
@@ -445,7 +445,7 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
             H_o_sunlit = (Tc_o_sunlit_new-temp_air)*rho_a * Cp_ca*Gh_o_sunlit;
             H_o_shaded = (Tc_o_shaded_new-temp_air)*rho_a * Cp_ca*Gh_o_shaded;
-            GH_o = H_o_sunlit*LAI_o_sunlit+H_o_shaded*LAI_o_shaded;  // for next num aerodynamic conductance calculation
+            GH_o = H_o_sunlit*PAI_o_sunlit+H_o_shaded*PAI_o_shaded;  // for next num aerodynamic conductance calculation
 
             if(fabs(Tc_o_sunlit_new-Tc_o_sunlit_old)<0.02 && fabs(Tc_o_shaded_new-Tc_o_shaded_old)<0.02 &&
                fabs(Tc_u_sunlit_new-Tc_u_sunlit_old)<0.02 && fabs(Tc_u_shaded_new-Tc_u_shaded_old)<0.02 )
@@ -486,7 +486,7 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
         evaporation_canopy(Tc_o_sunlit_new, Tc_o_shaded_new, Tc_u_sunlit_new, Tc_u_shaded_new,temp_air, rh_air,
                            Gww_o_sunlit, Gww_o_shaded, Gww_u_sunlit, Gww_u_shaded,
-                           LAI_o_sunlit, LAI_o_shaded, LAI_u_sunlit, LAI_u_shaded,
+                           PAI_o_sunlit, PAI_o_shaded, PAI_u_sunlit, PAI_u_shaded,
                            Xcl_o[kkk], Xcl_u[kkk], Xcs_o[kkk], Xcs_u[kkk],
                            &Eil_o[kkk], &Eil_u[kkk], &EiS_o[kkk], &EiS_u[kkk]);
 
@@ -550,7 +550,7 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
         sensible_heat(Tc_o_sunlit_new, Tc_o_shaded_new, Tc_u_sunlit_new, Tc_u_shaded_new, Ts0[kkk], temp_air, rh_air,
                       Gh_o_sunlit, Gh_o_shaded, Gh_u_sunlit, Gh_u_shaded, Gheat_g,
-                      LAI_o_sunlit, LAI_o_shaded, LAI_u_sunlit, LAI_u_shaded,
+                      PAI_o_sunlit, PAI_o_shaded, PAI_u_sunlit, PAI_u_shaded,
                       &Qhc_o[kkk], &Qhc_u[kkk], &Qhg[kkk]);
 
 	 
@@ -613,9 +613,6 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
 
     mid_res->Trans = (Trans_o[kkk]+Trans_u[kkk])*step;	// total transpiration  mm/step
     mid_res->Evap = (Eil_o[kkk]+Eil_u[kkk]+Evap_soil[kkk]+Evap_SW[kkk]+EiS_o[kkk]+EiS_u[kkk]+Evap_SS[kkk])*step;   // total evaporation -> mm/step
-
-    printf("%f %f %f %f %f %f \n",Trans_o[kkk]*step,Trans_u[kkk]*step,
-           Eil_o[kkk]*step,Eil_u[kkk]*step,EiS_o[kkk]*step,EiS_u[kkk]*step);
 
     mid_res->gpp_o_sunlit = GPP_o_sunlit;   // umol C/m2/s
     mid_res->gpp_u_sunlit = GPP_u_sunlit;
