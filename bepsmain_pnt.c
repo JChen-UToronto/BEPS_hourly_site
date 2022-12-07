@@ -163,7 +163,7 @@ int main() {
             m_rad[jday-1][rstep-1]=(float)rv;
             m_tem[jday-1][rstep-1]=(float)tv;
             m_hum[jday-1][rstep-1]=(float)hv;
-            m_pre[jday-1][rstep-1]=(float)pv/1000/3600; // convert precipitation mm/h to m/s
+            m_pre[jday-1][rstep-1]=(float)pv/1000; // convert precipitation mm/h to m/s
             m_wind[jday-1][rstep-1]=(float)wv;
 
         }  // end of hour loop
