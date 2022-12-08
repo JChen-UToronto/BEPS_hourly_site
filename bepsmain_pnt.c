@@ -55,16 +55,15 @@ int main() {
 
     /*****  setup input/output file directory  *****/
     // Input file stream
-    sprintf(inp_dir, "/Users/jiye.leng/Desktop/BEPS_Stomata_Vcmax_Bayes/input");
+    sprintf(inp_dir, "../input");
     sprintf(site, "p1"); // site name
     sprintf(lc_fn, "%s/%s_data1.txt", inp_dir, site); // basic info
     sprintf(cp_fn, "%s/%s_data2.txt", inp_dir,site); // carbon pool
     sprintf(lai_fn, "%s/%s_lai.txt", inp_dir, site); // daily leaf area index
     sprintf(me_fn, "%s/%s_meteo.txt", inp_dir, site); // hourly meteor. data
-    sprintf(bbparam_fn, "%s/%s_bbparam.txt", inp_dir, site); // Ball-Berry param file
 
     // Output file stream
-    sprintf(outp_fn, "/Users/jiye.leng/Desktop/BEPS_Stomata_Vcmax_Bayes/output/%s_bbparam.txt", site);
+    sprintf(outp_fn, "../%s_bbparam.txt", site);
 
     // Set all accu. to 0
     for (i = 0; i <= 10; i++) total[i] = 0;
@@ -130,18 +129,6 @@ int main() {
         exit(0);
     }
 
-    // Open Ball-Berry param file
-    if ((bbparam_ptr=fopen(bbparam_fn, "r")) == NULL)
-    {
-        printf("\n Unable to open Ball-Berry param file, exiting program... \n");
-        exit(0);
-    }
-
-    fscanf(bbparam_ptr, "%f %f %f", &gs_mv, &gs_bv, &vcmaxv);
-    gs_m = gs_mv;
-    gs_b = gs_bv;
-    vcmax = vcmaxv;
-    fclose(bbparam_ptr);
 
     // Open meteor. files
     if ((me_ptr=fopen(me_fn, "r")) == NULL)
@@ -174,7 +161,7 @@ int main() {
 	fclose(me_ptr);
 
 	// Read parameters according to land cover types
-	readparam(landcover,parameter, gs_m, gs_b, vcmax);
+	readparam(landcover,parameter);
 
 	// Read soil coefficients according to land cover types and soil types
     // for soil respiration and NEP calculation
