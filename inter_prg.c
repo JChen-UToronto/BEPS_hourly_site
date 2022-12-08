@@ -421,9 +421,9 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
             Gc_o_shaded=1.0/(1.0/G_o_a+1.4/G_o_b+1.6/Gs_o_shaded_new); //conductance of sunlit leaves of overstorey for CO2
 
 
-            Ci_u_sunlit_old=Ci_o_sunlit_new;
+            Ci_u_sunlit_old=Ci_u_sunlit_new;
             Cs_u_sunlit_old=Cs_u_sunlit_new;
-            Gs_u_sunlit_old=Gs_o_sunlit_new;   // m/s
+            Gs_u_sunlit_old=Gs_u_sunlit_new;   // m/s
             Gw_u_sunlit=1.0/(1.0/G_u_a+1.0/G_u_b+1.0/Gs_u_sunlit_new); //conductance of sunlit leaves of overstorey for water
             Gc_u_sunlit=1.0/(1.0/G_u_a+1.4/G_u_b+1.6/Gs_u_sunlit_new); //conductance of sunlit leaves of overstorey for CO2
 
