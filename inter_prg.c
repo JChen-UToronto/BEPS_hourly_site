@@ -631,12 +631,12 @@ void inter_prg(int jday,int rstep,double lai,double clumping,double parameter[],
     if(Gs_o_sunlit_new == 0.0001 || Gs_o_shaded_new == 0.0001)
     {
         mid_res->Gs_o_sunlit = Gs_o_sunlit_new;
-        mid_res->Gs_o_sunlit = Gs_o_shaded_new;
+        mid_res->Gs_o_shaded = Gs_o_shaded_new;
     }
     else
     {
         mid_res->Gs_o_sunlit = Gs_o_sunlit_new / (temp_air + 273.13) / met.pstat273;
-        mid_res->Gs_o_sunlit = Gs_o_shaded_new / (temp_air + 273.13) / met.pstat273;
+        mid_res->Gs_o_shaded = Gs_o_shaded_new / (temp_air + 273.13) / met.pstat273;
     }
 
     mid_res->lai_o_sunlit = LAI_o_sunlit;
