@@ -130,7 +130,7 @@ void soilresp(double* Ccd, double* Cssd, double* Csmd, double* Cfsd, double* Cfm
               double* Csm, double* Cm, double* Cs, double* Cp, float npp_yr, double* coef,
               int soiltype, struct Soil* soilp,struct results* mid_res);
 
-void readparam(short lc, double parameter1[], double gs_m, double gs_b, double vcmax);
+void readparam(short lc, double parameter1[]);
 
 void lai2(double stem_o,double stem_u,int LC,double CosZs,double lai_o,double clumping,double lai_u,
           double* lai_o_sunlit,double* lai_o_shaded,double* lai_u_sunlit,double* lai_u_shaded,
