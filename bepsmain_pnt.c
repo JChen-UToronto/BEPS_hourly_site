@@ -1,7 +1,8 @@
 /// @file bepsmain_pnt.c
 /// @brief Main function.
-/// BEPS, for Boreal Ecosystems Productivity Simulator.
-/// BEPS 4.01 for a point, to simulate carbon fluxes, energy fluxes and soil water...
+/// BEPS, for Biosphere-atmosphere Exchange Process Simulator, renamed from Boreal Ecosystems Productivity Simulator.
+/// BEPS was initially developed for boreal ecosystems but was subsequently expanded to all ecosystems of the globe.
+/// BEPS 4.11 for a site, to simulate carbon fluxes, energy fluxes and soil water...
 
 
 #include "beps.h"
