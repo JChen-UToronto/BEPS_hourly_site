@@ -1,6 +1,6 @@
-@mainpage BEPS hourly version (v4.10)
+@mainpage BEPS hourly version (v4.11)
 
-The user guide for BEPS hourly version for site (v4.10)
+The user guide for the Biosphere-atmosphere Exchange Process Simulator (BEPS) hourly version for site (v4.11), renamed from the Boreal Ecosystem Productivity Simulator.
 
 -----------------------------------------
 -----------------------------------------
@@ -9,7 +9,7 @@ This model was initially developed for boreal ecosystems and has been adapted fo
 BEPS mechanistically includes the impacts of various drivers on gross primary productivity (GPP) (climate, CO2 concentration, and nitrogen deposition) and assimilates vegetation structure (LAI) data.
 BEPS also simulates the dynamics of carbon pools beyond GPP and uses a spin-up procedure to prescribe soil carbon pools for estimating autotrophic respiration (AR) and heterotrophic respiration (HR).
 
-The BEPS hourly version for site (v4.10) can be used in two ways:
+The BEPS hourly version for site (v4.11) can be used in two ways:
 
 1. Dependency import
 Please copy the header file and source file into traditional IDEs (i.e. Code::block, https://www.codeblocks.org/) and directly build and run the model.
