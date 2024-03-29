@@ -27,13 +27,14 @@ Please see "Modules_variables4BEPS.docx" for detailed parameter descriptions.
 -----------------------------------------
 -----------------------------------------
 
-Please cite the following [ARTICLES] for using the BEPS 4.11：
+Please cite the following [ARTICLES] for using the BEPS 4.11:
+
 • Leng et al., 2024, Global datasets of hourly carbon and water fluxes simulated using a satellite-based process model with dynamic parameterizations, Earth System Science Data.
 
 -----------------------------------------
 -----------------------------------------
 
-Please cite the following [ARTICLES] for using the modules in the BEPS model：
+Please cite the following [ARTICLES] for using the modules in the BEPS model:
 
 • Liu, J., Chen, J., Cihlar, J., and Park, W. M., A process-based boreal ecosystem productivity simulator using remote sensing inputs, Remote Sensing of Environment, 62, 158-175, 1997.
 
