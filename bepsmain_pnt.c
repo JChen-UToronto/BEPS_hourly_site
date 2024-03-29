@@ -3,6 +3,12 @@
 /// BEPS, for Biosphere-atmosphere Exchange Process Simulator, renamed from Boreal Ecosystems Productivity Simulator.
 /// BEPS was initially developed for boreal ecosystems but was subsequently expanded to all ecosystems of the globe.
 /// BEPS 4.11 for a site, to simulate carbon fluxes, energy fluxes and soil water...
+///
+/// Please cite Leng et al., 2024, Global datasets of hourly carbon and water fluxes simulated using a satellite-based 
+/// process model with dynamic parameterizations, Earth System Science Data, if you use the BEPS 4.11 in your research.
+///
+/// Author: J.Y.L.@UofT
+/// Date: Mar., 2024
 
 
 #include "beps.h"
