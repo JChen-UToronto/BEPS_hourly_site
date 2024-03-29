@@ -1,6 +1,6 @@
 @mainpage BEPS hourly version (v4.11)
 
-The user guide for the Biosphere-atmosphere Exchange Process Simulator (BEPS) hourly version for site (v4.11), renamed from the Boreal Ecosystem Productivity Simulator.
+The user guide for the Biosphere-atmosphere Exchange Process Simulator (BEPS) hourly version for single site (v4.11), renamed from the Boreal Ecosystem Productivity Simulator.
 
 -----------------------------------------
 -----------------------------------------
@@ -9,25 +9,31 @@ This model was initially developed for boreal ecosystems and has been adapted fo
 BEPS mechanistically includes the impacts of various drivers on gross primary productivity (GPP) (climate, CO2 concentration, and nitrogen deposition) and assimilates vegetation structure (LAI) data.
 BEPS also simulates the dynamics of carbon pools beyond GPP and uses a spin-up procedure to prescribe soil carbon pools for estimating autotrophic respiration (AR) and heterotrophic respiration (HR).
 
-The BEPS hourly version for site (v4.11) can be used in two ways:
+The BEPS hourly version for single site (v4.11) can be used in two ways:
 
 1. Dependency import
 Please copy the header file and source file into traditional IDEs (i.e. Code::block, https://www.codeblocks.org/) and directly build and run the model.
 
 2. CMake
-Please find the "CMakeLists.txt" file. The BEPS v4.10 model requires minimum 3.17 CMake version and is based on C99 standard.
+Please find the "CMakeLists.txt" file. The BEPS v4.10 model requires a minimum 3.17 CMake version and is based on the C99 standard.
 It is recommended to use CLion (https://www.jetbrains.com/clion/) and MingW (https://www.mingw-w64.org/) to compile and run the model.
 
 Make sure the "input" and "output" folders have been created in the current folder of the source codes.
 
-According to users' research interests, the parameters and code structure can be edited. Please remember to make readable comment and git version control after each edition.
+According to users' research interests, the parameters and code structure can be edited. Please remember to make readable comments and git version control after each edition.
 
 Please see "Modules_variables4BEPS.docx" for detailed parameter descriptions.
 
 -----------------------------------------
 -----------------------------------------
 
-Please cite the following [ARTICLES] for using the BEPS model：
+Please cite the following [ARTICLES] for using the BEPS 4.11：
+• Leng et al., 2024, Global datasets of hourly carbon and water fluxes simulated using a satellite-based process model with dynamic parameterizations, Earth System Science Data.
+
+-----------------------------------------
+-----------------------------------------
+
+Please cite the following [ARTICLES] for using the modules in the BEPS model：
 
 • Liu, J., Chen, J., Cihlar, J., and Park, W. M., A process-based boreal ecosystem productivity simulator using remote sensing inputs, Remote Sensing of Environment, 62, 158-175, 1997.
 
