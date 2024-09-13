@@ -80,7 +80,7 @@ LAI_yr, ann_NPP,  ccd,  cssd,  csmd,  cfsd,  cfmd,  csm,  cm,  cs,  cp [WITH TAB
 
 3) Leaf area index
 
-Daily float number LAI [WITH TAB SPACE]
+Day of Year, Daily float number LAI [WITH TAB SPACE]
 
 4) Meteorological data
 
